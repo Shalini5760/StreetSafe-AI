@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Dog</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Register a Dog</h2>
+
+        <form method="POST">
+            <label>QR Code:</label>
+            <input type="text" name="qr_code" required><br><br>
+
+            <label>Latitude:</label>
+            <input type="text" name="latitude" required><br><br>
+
+            <label>Longitude:</label>
+            <input type="text" name="longitude" required><br><br>
+
+            <label>Gender:</label>
+            <input type="text" name="gender"><br><br>
+
+            <label>Estimated Age:</label>
+            <input type="number" name="estimated_age"><br><br>
+
+            <label>Color:</label>
+            <input type="text" name="color"><br><br>
+
+            <label>Health Status:</label>
+            <input type="text" name="health_status"><br><br>
+
+            <label>Is Sterilized:</label>
+            <select name="is_sterilized">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select><br><br>
+
+            <label>Last Seen Date:</label>
+            <input type="date" name="last_seen_date"><br><br>
+
+            <input type="submit" value="Register Dog">
+        </form>
+
+        <br>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

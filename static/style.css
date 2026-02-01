@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f5;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+h1, h2 {
+    color: #111;
+}
+
+a {
+    color: blue;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #aaa;
+    padding: 8px;
+}

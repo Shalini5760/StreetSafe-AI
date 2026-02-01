@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit Complaint</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Submit a Complaint</h2>
+        <form method="POST">
+            <label>Dog QR ID (optional):</label><input type="text" name="dog_id"><br>
+            <label>Complaint Type:</label>
+            <select name="complaint_type">
+                <option value="Bite">Bite</option>
+                <option value="Injury">Injury</option>
+                <option value="Aggression">Aggression</option>
+                <option value="Other">Other</option>
+            </select><br>
+            <label>Description:</label><br>
+            <textarea name="description" rows="4" cols="50"></textarea><br>
+            <label>Latitude:</label><input type="text" name="latitude"><br>
+            <label>Longitude:</label><input type="text" name="longitude"><br><br>
+            <input type="submit" value="Submit Complaint">
+        </form>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>

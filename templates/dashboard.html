@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StreetSafe-AI Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>StreetSafe-AI Dashboard</h1>
+
+        <h2>Registered Dogs</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>QR Code</th>
+                <th>Location</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Color</th>
+                <th>Health</th>
+                <th>Sterilized</th>
+            </tr>
+            {% for dog in dogs %}
+            <tr>
+                <td>{{ dog['dog_id'] }}</td>
+                <td>{{ dog['qr_code'] }}</td>
+                <td>{{ dog['latitude'] }}, {{ dog['longitude'] }}</td>
+                <td>{{ dog['gender'] }}</td>
+                <td>{{ dog['estimated_age'] }}</td>
+                <td>{{ dog['color'] }}</td>
+                <td>{{ dog['health_status'] }}</td>
+                <td>{{ 'Yes' if dog['is_sterilized'] else 'No' }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Complaints</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Dog ID</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Reported At</th>
+            </tr>
+            {% for comp in complaints %}
+            <tr>
+                <td>{{ comp['complaint_id'] }}</td>
+                <td>{{ comp['dog_id'] or 'N/A' }}</td>
+                <td>{{ comp['complaint_type'] }}</td>
+                <td>{{ comp['description'] }}</td>
+                <td>{{ comp['latitude'] }}, {{ comp['longitude'] }}</td>
+                <td>{{ comp['priority'] }}</td>
+                <td>{{ comp['status'] }}</td>
+                <td>{{ comp['reported_at'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>
