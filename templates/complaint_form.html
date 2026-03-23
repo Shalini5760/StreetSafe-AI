@@ -1,28 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Submit Complaint</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Submit Complaint - StreetSafe AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h2>Submit a Complaint</h2>
-        <form method="POST">
-            <label>Dog QR ID (optional):</label><input type="text" name="dog_id"><br>
-            <label>Complaint Type:</label>
-            <select name="complaint_type">
-                <option value="Bite">Bite</option>
-                <option value="Injury">Injury</option>
-                <option value="Aggression">Aggression</option>
-                <option value="Other">Other</option>
-            </select><br>
-            <label>Description:</label><br>
-            <textarea name="description" rows="4" cols="50"></textarea><br>
-            <label>Latitude:</label><input type="text" name="latitude"><br>
-            <label>Longitude:</label><input type="text" name="longitude"><br><br>
-            <input type="submit" value="Submit Complaint">
-        </form>
-        <a href="/">Back to Home</a>
+
+<div class="page-container">
+
+    <h2 class="page-title">Submit a Complaint</h2>
+
+    <form method="POST" class="form-card">
+
+        <label>Dog QR ID (Optional)</label>
+        <input type="text" name="dog_id">
+
+        <label>Complaint Type</label>
+        <select name="complaint_type">
+            <option value="Bite">Bite</option>
+            <option value="Injury">Injury</option>
+            <option value="Aggression">Aggression</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Description</label>
+        <textarea name="description" rows="4"></textarea>
+
+        <label>Latitude</label>
+        <input type="text" name="latitude">
+
+        <label>Longitude</label>
+        <input type="text" name="longitude">
+
+        <button type="submit" class="btn-primary">Submit Complaint</button>
+    </form>
+
+    {% if success %}
+    <div class="success-box">
+        <h3>Complaint Submitted Successfully</h3>
+        <p><strong>Complaint ID:</strong> {{ complaint_id }}</p>
+
+        <img src="{{ url_for('static', filename=qr_path) }}" 
+             alt="Complaint QR Code" 
+             width="180">
+
+        <br><br>
+        <a href="/dashboard" class="btn-primary">Go to Dashboard</a>
     </div>
+    {% endif %}
+
+    <a href="/" class="back-link">← Back to Home</a>
+
+</div>
+
 </body>
 </html>

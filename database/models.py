@@ -66,3 +66,32 @@ class Complaint:
         conn.close()
         data['complaint_id'] = complaint_id
         return type('ComplaintObj', (), data)()
+
+import sqlite3
+from config import DB_PATH
+
+class Complaint:
+    def __init__(self, complaint_id):
+        self.complaint_id = complaint_id
+
+
+def create_complaint(data):
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        INSERT INTO complaints (dog_id, complaint_type, description, latitude, longitude)
+        VALUES (?, ?, ?, ?, ?)
+    """, (
+        data.get("dog_id"),
+        data.get("complaint_type"),
+        data.get("description"),
+        data.get("latitude"),
+        data.get("longitude")
+    ))
+
+    conn.commit()
+    complaint_id = cursor.lastrowid
+    conn.close()
+
+    return Complaint(complaint_id)

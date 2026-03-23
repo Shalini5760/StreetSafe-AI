@@ -1,49 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Register Dog</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Register Dog - StreetSafe AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h2>Register a Dog</h2>
 
-        <form method="POST">
-            <label>QR Code:</label>
-            <input type="text" name="qr_code" required><br><br>
+<div class="page-container">
 
-            <label>Latitude:</label>
-            <input type="text" name="latitude" required><br><br>
+    <h2 class="page-title">Register a Street Dog</h2>
 
-            <label>Longitude:</label>
-            <input type="text" name="longitude" required><br><br>
+    <form method="POST" class="form-card">
 
-            <label>Gender:</label>
-            <input type="text" name="gender"><br><br>
+        <label>QR Code</label>
+        <input type="text" name="qr_code" required>
 
-            <label>Estimated Age:</label>
-            <input type="number" name="estimated_age"><br><br>
+        <label>Latitude</label>
+        <input type="text" name="latitude" required>
 
-            <label>Color:</label>
-            <input type="text" name="color"><br><br>
+        <label>Longitude</label>
+        <input type="text" name="longitude" required>
 
-            <label>Health Status:</label>
-            <input type="text" name="health_status"><br><br>
+        <label>Gender</label>
+        <select name="gender">
+            <option>Male</option>
+            <option>Female</option>
+        </select>
 
-            <label>Is Sterilized:</label>
-            <select name="is_sterilized">
-                <option value="0">No</option>
-                <option value="1">Yes</option>
-            </select><br><br>
+        <label>Estimated Age</label>
+        <input type="number" name="estimated_age">
 
-            <label>Last Seen Date:</label>
-            <input type="date" name="last_seen_date"><br><br>
+        <label>Color</label>
+        <input type="text" name="color">
 
-            <input type="submit" value="Register Dog">
-        </form>
+        <label>Health Status</label>
+        <input type="text" name="health_status">
 
-        <br>
-        <a href="/">Back to Home</a>
-    </div>
+        <label>Sterilized</label>
+        <select name="sterilized">
+            <option>Yes</option>
+            <option>No</option>
+        </select>
+
+        <label>Last Seen Date</label>
+        <input type="date" name="last_seen_date">
+
+        <button type="submit" class="btn-primary">Register Dog</button>
+    </form>
+
+    <a href="/" class="back-link">← Back to Home</a>
+
+</div>
+
 </body>
 </html>

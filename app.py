@@ -1,15 +1,13 @@
-from flask import Flask, request, jsonify, render_template
-from database.models import init_db, Dog, Complaint
+from flask import Flask, request, render_template
+from database.models import init_db, Dog
+from complaints.complaint_intake import clean_complaint_text
 from qr_management.qr_generator import generate_qr
-from complaints.complaint_intake import create_complaint
 from municipal_actions.task_assigner import assign_task
 import sqlite3
 from config import DB_PATH
-from qr_management.qr_generator import generate_qr
-
+from database.models import create_complaint
 
 app = Flask(__name__)
-
 init_db()
 
 def fetch_all(table):
@@ -25,7 +23,7 @@ def fetch_all(table):
 def home():
     return render_template('index.html')
 
-@app.route('/dog/register', methods=['GET','POST'])
+@app.route('/dog/register', methods=['GET', 'POST'])
 def register_dog():
     if request.method == 'POST':
         data = request.form.to_dict()
@@ -34,14 +32,31 @@ def register_dog():
         return f"Dog Registered! ID: {dog.dog_id}, QR: {qr} <br><a href='/dashboard'>Go to Dashboard</a>"
     return render_template('register_dog.html')
 
-@app.route('/complaint', methods=['GET','POST'])
+@app.route('/complaint', methods=['GET', 'POST'])
 def submit_complaint():
     if request.method == 'POST':
         data = request.form.to_dict()
+
         complaint = create_complaint(data)
+
+        # Generate QR
+        qr_path = generate_qr(complaint.complaint_id)
+
         assign_task(complaint)
-        return f"Complaint Submitted! ID: {complaint.complaint_id}, Status: {complaint.status} <br><a href='/dashboard'>Go to Dashboard</a>"
-    return render_template('complaint_form.html')
+
+        print("Generated QR:", qr_path)  # Debug line
+
+        return render_template(
+            'complaint_form.html',
+            success=True,
+            complaint_id=complaint.complaint_id,
+            qr_path=qr_path
+        )
+
+    return render_template(
+        'complaint_form.html',
+        success=False
+    )
 
 @app.route('/dashboard')
 def dashboard():
